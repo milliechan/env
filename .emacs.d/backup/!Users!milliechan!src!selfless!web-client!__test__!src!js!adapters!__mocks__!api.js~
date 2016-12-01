@@ -1,0 +1,40 @@
+let faker = require('faker')
+
+const api = jest.genMockFromModule('api')
+
+export function CLIENT_REQUEST(args) {
+    let token = faker.random.uuid()
+    let url = args.path
+    let method = args.method
+    let data = args.data
+
+    if (!token || !url || !method || ['get', 'post'].indexOf(method) === -1) {
+        return false;
+    }
+    let build_headers = jest.fn(token)
+
+    let headers = build_headers({token})
+    let opts = {
+        url,
+        method,
+        headers
+    }
+    if (data) {
+        opts.data = data
+    }
+
+    let response = {
+        data: {
+            data: {
+                full_name: args.data.full_name,
+                email: args.data.email,
+                create_user_token: token,
+                user_id: faker.random.uuid()
+            }
+        }
+    }
+    return response
+}
+
+fs.CLIENT_REQUEST = CLIENT_REQUEST;
+module.exports = api;

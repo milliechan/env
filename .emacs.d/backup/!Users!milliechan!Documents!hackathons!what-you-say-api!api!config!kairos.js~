@@ -1,0 +1,4 @@
+var Kairos = require('kairos-api');
+var kairos = new Kairos('c64709ae', '12352e63b9f6aab1eceee45b21091a63');
+
+module.exports = kairos;

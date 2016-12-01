@@ -1,0 +1,69 @@
+import axios from 'axios';
+import { Settings } from '../settings';
+
+export const USERS_UPDATE_USERNAME_REQUEST = Symbol('users update username -- request start');
+export const USERS_UPDATE_USERNAME_SUCCESS = Symbol('users update username -- request success');
+export const USERS_UPDATE_USERNAME_ERROR = Symbol('users update username -- request error');
+export const USERS_UPDATE_ZIPCODE_REQUEST = Symbol('users update zipcode -- request start');
+export const USERS_UPDATE_ZIPCODE_SUCCESS = Symbol('users update zipcode -- request success');
+export const USERS_UPDATE_ZIPCODE_ERROR = Symbol('users update zipcode -- request error');
+
+const HOST = Settings.api_host;
+
+export function userFinalize(args) {
+    let url = HOST + '/users/create';
+    return (dispatch) => {
+        dispatch(updateUsernameRequest());
+        axios({
+            method: 'post',
+            url,
+            data: args
+        })
+            .then((response) => {
+                dispatch(updateUsernameSuccess(response));
+            })
+            .catch((error) => {
+                dispatch(updateUsernameError(error));
+            });
+    }
+}
+
+
+
+
+
+export function updateUsernameRequest() {
+    return {
+        type: USERS_UPDATE_USERNAME_REQUEST
+    };
+}
+
+export function updateUsernameSuccess() {
+    return {
+        type: USERS_UPDATE_USERNAME_SUCCESS
+    };
+}
+
+export function updateUsernameError() {
+    return {
+        type: USERS_UPDATE_USERNAME_ERROR
+    };
+ }
+
+export function updateZipcodeRequest() {
+    return {
+        type: USERS_UPDATE_ZIPCODE_REQUEST
+    };
+}
+
+export function updateZipcodeSuccess() {
+    return {
+        type: USERS_UPDATE_ZIPCODE_SUCCESS
+    }
+}
+
+export function updateZipcodeError() {
+    return {
+        type: USERS_UPDATE_ZIPCODE_ERROR
+    }
+}

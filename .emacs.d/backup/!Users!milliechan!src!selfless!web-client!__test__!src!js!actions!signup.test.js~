@@ -1,0 +1,7 @@
+import { validateFullName } from  '../src/js/actions/signup'
+
+describe('signup actions', function() {
+    describe('validateFullName', function() {
+
+    });
+});

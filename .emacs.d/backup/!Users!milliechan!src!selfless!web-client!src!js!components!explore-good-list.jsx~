@@ -1,0 +1,52 @@
+import React, { PropTypes } from 'react';
+import ExploreGoodItem from '/.explore-good-item';
+
+class ExploreGoodList extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    let results = [];
+    let rows = new Array(Math.ceil(this.props.results.length / 3));
+    let currentRow = 0;
+
+    if (rows.length) {
+      rows[currentRow] = [];
+    }
+
+    for (let i = 0; i < this.props.results.length; i++) {
+      let data = this.props.results[i];
+
+      if (i !== 0 && i % 3 === 0) {
+        currentRow++;
+        rows[currentRow] = [];
+      }
+
+      rows[currentRow].push((
+        <ExploreGoodItem key={data.good_id} {...data} />
+      ));
+    }
+
+    for (let i = 0; i < rows.length; i++ ) {
+      let row = rows[i];
+      results.push((
+        <div key={i} className="search-row">
+          {row}
+        </div>
+      ))
+    }
+
+    return (
+      <div className="search-good-list">
+        { results }
+      </div>
+    );
+  }
+};
+
+ExploreGoodList.propTypes = {
+  results: PropTypes.array
+}
+
+export default ExploreGoodList;

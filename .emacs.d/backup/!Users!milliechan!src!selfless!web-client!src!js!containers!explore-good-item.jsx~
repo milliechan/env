@@ -1,0 +1,48 @@
+import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
+
+
+class ExploreGoodItem extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render () {
+    let path = '/g/' + this.props.good_id;
+    return (
+      <Link className="search-good-item" to={path}>
+        <div className="bg">
+          <div className="img-container">
+            <img className="img"  src={this.props.image_url}/>
+          </div>
+        </div>
+      </Link>
+    )
+  }
+}
+class SearchGoodItem extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    let path = '/g/' + this.props.good_id;
+    return (
+      <Link className="search-good-item" to={path}>
+        <div className="bg">
+          <div className="img-container">
+            <img className="img" src={this.props.image_url}/>
+          </div>
+        </div>
+      </Link>
+    );
+  }
+};
+
+SearchGoodItem.propTypes = {
+  good_id: PropTypes.string.isRequired,
+  image_url: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired
+};
+
+export default SearchGoodItem;

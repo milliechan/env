@@ -1,0 +1,42 @@
+import * as actions from '../actions/users-finalize'
+
+let initialState = {
+    is_requesting: false,
+    error_type: '',
+    error_username: false,
+    error_zipcode: false
+}
+
+export default function userFinalize(state = initialState, action) {
+    switch(action.type) {
+        case actions.USERS_UPDATE_USERNAME_REQUEST:
+            return Object.assign({}, state, {
+                is_requesting: true
+            })
+        case actions.USERS_UPDATE_USERNAME_SUCCESS:
+            return Object.assign({}, state {
+                is_requesting: false,
+                error_type: ''
+            })
+        case actions.USERS_UPDATE_USERNAME_ERROR:
+            return Object.assign({}, state {
+                is_requesting: false,
+                error_type: action.error_type
+            })
+        case actions.USERS_UPDATE_ZIPCODE_REQUEST:
+            return Object.assign({}, state, {
+                is_requesting: true,
+           })
+        case actions.USERS_UPDATE_ZIPCODE_SUCCESS:
+            return Object.assign({}, state, {
+                is_requesting: false,
+                error_type: ''
+            })
+        case actions.USERS_UPDATE_ZIPCODE_ERROR:
+            return Object.assign({}, state, {
+                error_type: action.error_type
+            })
+        default:
+            return state
+    }
+  }

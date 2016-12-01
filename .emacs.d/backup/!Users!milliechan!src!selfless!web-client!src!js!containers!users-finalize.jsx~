@@ -1,0 +1,32 @@
+import { connect } from 'react-redux'
+import  { finalize } from '../actions/users-finalize'
+import UsersFinalize from '../components/users-finalize'
+
+const mapStateToProps = (state) => {
+    return {
+        username: state.finalize.username,
+        zipcode: state.finalize.zipcode,
+        is_authenticated: state.login.web_token ? true : false,
+        error_username: state.finalize.error_username,
+        error_zipcode: state.finalize.error_zipcode
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onSubmit: (data) => {
+            dispatch(userFinalize(data));
+        },
+        validateUsername: (username) => {
+            dispatch(validateUsername(username));
+        },
+        validateZipcode: (zipcode) => {
+            dispatch(validateZipcode(zipcode));
+        }
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(UsersFinalize)
